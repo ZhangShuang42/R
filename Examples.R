@@ -6,10 +6,10 @@ exact=F,correct=F,confi.int=T)
 #结果输出：
 
 	Wilcoxon signed rank test
-
 data:  x
 V = 53.5, p-value = 0.03411
 alternative hypothesis: true location is greater than 12
+
 
 #Brown-Mood中位数检验
 x=c(11:20,40,60)
@@ -25,3 +25,10 @@ a=sum(x>mxy)  #a=9
 b=sum(y>mxy)  #b=2
 p=phyper(b,n,m,a+b) #p=0.0149865614261899<0.05，所以我们拒绝H0，认为Mx>My
 p=phyper(a,m,n,a+b) #当a<b时，即H1:Mx<My
+
+#Wilcoxon(Mann-Whitney)秩和检验
+wxy=sum(outer(y,x,"-")>0)  #wxy=21
+pwilcox(21,m,n)  #p=0.004478494<0.05
+    #检验表：H1:Mx>My  Wxy或Wy                   P(K<=k)
+            H1:Mx<My  Wyx或Wx                   P(K<=k)
+            H1:Mx!=My min(Wxy,Wyx)或min(Wx,Wy)  2P(K<=k)
