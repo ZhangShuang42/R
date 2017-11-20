@@ -32,3 +32,21 @@ pwilcox(21,m,n)  #p=0.004478494<0.05
     #检验表：H1:Mx>My  Wxy或Wy                   P(K<=k)
             H1:Mx<My  Wyx或Wx                   P(K<=k)
             H1:Mx!=My min(Wxy,Wyx)或min(Wx,Wy)  2P(K<=k)
+
+
+#Wilcoxon两配对检验
+     H1:mx!=my
+x = c(15,21,18,13,35,10,17,23,14,25)
+y = c(17,18,25,16,40,8,21,31,22,25)
+d=x-y
+rd=rank(abs(d))
+w1=sum(rd*(x-y>0))
+w2=sum(rd*(x-y<0))
+2*psignrank(min(sum(x<y),sum(x>y)),10)     [1] 0.005859375  拒绝原假设，有显著差异
+
+wilcox.test(x,y,paired=T)
+     #结果如下：
+	Wilcoxon signed rank test with continuity correction
+data:  x and y
+V = 5, p-value = 0.04346
+alternative hypothesis: true location shift is not equal to 0   拒绝原假设
