@@ -13,11 +13,8 @@ alternative hypothesis: true location is greater than 12
 
 #Brown-Mood中位数检验
 x=c(11:20,40,60)
-length(x)
 y=c(3:10,30,50)
-length(y)
 z=c(x,y)
-length(z)
 m=length(x)
 n=length(y)
 mxy=median(z)
@@ -25,6 +22,14 @@ a=sum(x>mxy)  #a=9
 b=sum(y>mxy)  #b=2
 p=phyper(b,n,m,a+b) #p=0.0149865614261899<0.05，所以我们拒绝H0，认为Mx>My
 p=phyper(a,m,n,a+b) #当a<b时，即H1:Mx<My
+
+#中位数之差的点估计
+g = median(outer(x,y,"-"))
+
+#中位数之差的95%区间估计
+D=sort(as.vector(outer(x,y,"-")))
+qwilcox(0.025,m,n)
+(Dwa/2,Dmn+1-wa/2)为区间
 
 #Wilcoxon(Mann-Whitney)秩和检验
 wxy=sum(outer(y,x,"-")>0)  #wxy=21
@@ -50,3 +55,6 @@ wilcox.test(x,y,paired=T)
 data:  x and y
 V = 5, p-value = 0.04346
 alternative hypothesis: true location shift is not equal to 0   拒绝原假设
+
+#T检验
+t.test(x,y)
