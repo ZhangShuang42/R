@@ -42,3 +42,24 @@ N=length(c(x1,x2,x3))
 z=(J-(N^2-25-25-16)/4)/((N^2*(2*N+3)-25*(2*5+3)-25*13-16*11)/72)^0.5   #z=3.10336223197634
 pnorm(z,low=F)
 [1] 0.0009566765    #拒绝原假设
+
+
+#完全区组设计-Friedman秩和检验
+ #1 向量
+x=c(80,52,40,100,76,52,51,52,34,65,53,35)
+treat.x=c(1,2,3,1,2,3,1,2,3,1,2,3)
+block.x=c(1,1,1,2,2,2,3,3,3,4,4,4)
+friedman.test(x,treat.x,block.x)
+#结果：
+	Friedman rank sum test
+data:  x, treat.x and block.x
+Friedman chi-squared = 6.5, df = 2, p-value = 0.03877  #拒绝原假设，认为不同城市间有差异。
+
+ #2 矩阵
+b=read.table("d:/data/blead.txt")
+x=as.matrix(b)
+friedman.test(x)
+#结果：
+	Friedman rank sum test
+data:  x
+Friedman chi-squared = 6.5, df = 2, p-value = 0.03877
