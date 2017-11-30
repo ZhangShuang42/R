@@ -63,3 +63,23 @@ friedman.test(x)
 	Friedman rank sum test
 data:  x
 Friedman chi-squared = 6.5, df = 2, p-value = 0.03877
+
+
+#Kendall协同系数检验
+d = read.table("d:/data/airp.txt")
+R = apply(d,2,sum)
+m = nrow(d)
+n = ncol(d)
+S = sum((R-m*(n+1)/2)^2)
+W = 12*S/m^2/(n^3-n)
+pchisq(m*(n-1)*W,n-1,low=F)
+[1] 0.0003320349
+
+#完全区组设计：二元响应的Cochran检验
+x = read.table("d:/data/candid.txt")
+n = apply(x,2,sum)
+N = sum(n)
+L = apply(x,1,sum)
+k = dim(x)[2]
+Q = (k*(k-1)*sum((n-mean(n))^2))/(k*N-sum(L^2))
+pvalue = pchisq(Q,k-1,low=F) #0.0249483961178381
