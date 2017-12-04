@@ -83,3 +83,17 @@ L = apply(x,1,sum)
 k = dim(x)[2]
 Q = (k*(k-1)*sum((n-mean(n))^2))/(k*N-sum(L^2))
 pvalue = pchisq(Q,k-1,low=F) #0.0249483961178381
+
+
+#完全区组设计-Page检验
+
+d=read.table("d:/data/blead1.txt")
+rd=apply(d,1,rank)
+R=apply(rd,1,sum)
+L=sum(R*1:length(R))
+k=dim(d)[2]
+b=4
+m=b*k*(k+1)^2/4
+s=sqrt(b*(k^3-k)^2/144/(k-1))
+Z=(L-m)/s
+pnorm(Z,low=F)     [1] 0.006664164
