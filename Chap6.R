@@ -20,3 +20,17 @@ alternative hypothesis: true tau is not equal to 0
 sample estimates:
       tau 
 0.9111111 
+
+
+#Theil回归
+d=read.table("d:/data/CPIGINI.txt",header=T)
+x=d[,1]
+y=d[,2]
+n=nrow(d)
+s=NULL
+for(i in 1:(n-1))for(j in (i+1):n)s=c(s,(y[j]-y[i])/(x[j]-x[i]))
+b=median(s)
+a=median(y-b*x)
+e=y-a-b*x
+coef=c(a,b)
+  #结果：a=43.65;b=-1.667
